@@ -1,0 +1,44 @@
+class MinStack(object):
+
+    def __init__(self):
+        self.stack = []
+        self.minimums = deque()
+
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.stack.append(val)
+        
+        if self.minimums and val <= self.minimums[0]:
+            self.minimums.appendleft(val)
+            return
+        self.minimums.append(val)
+
+        
+
+    def pop(self):
+        """
+        :rtype: None
+        """
+        val = self.stack.pop()
+        if self.minimums[0] == val:
+            self.minimums.popleft()
+            return
+        self.minimums.pop()
+        
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        return self.stack[-1]
+        
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        return min(self.minimums[0], self.minimums[-1])
+        
